@@ -1,0 +1,17 @@
+{
+  "name": "di-darkweb-intel",
+  "version": "1.0.0",
+  "description": "DI DARKWEB INTEL: a fictional Halloween parody marketplace, built as one self-contained HTML file.",
+  "scripts": {
+    "build": "node build.mjs",
+    "qr": "node print/make-qr.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/chakra-petch": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "qrcode": "^1.5.4"
+  },
+  "private": true,
+  "type": "module"
+}
