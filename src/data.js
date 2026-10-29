@@ -25,7 +25,7 @@ window.SELLERS = [
       "Black outfit bonus (parody collectible)",
     ],
     images: [
-      // TODO art: 01_leadership_persona_library.webp, the persona book/media library (open item in the brief).
+      { src: "img/products/jason/01_leadership_persona_library.webp", alt: "A glowing blue shelf of leadership books by theme beside a laptop showing a searchable digital library of classic leadership titles", caption: "The Executive Library: every persona, every format." },
       { src: "img/products/jason/02_bonus_steve_jobs_outfit.webp", alt: "Black turtleneck, jeans and round glasses displayed in a lit glass case with a parody “collector’s edition” plaque", caption: "Bonus collectible: the Steve Jobs-inspired outfit. Parody, not authentic." },
     ],
   },
@@ -147,8 +147,7 @@ window.SELLERS = [
       "Five rare locks from Marissa’s freshly trimmed hair, each dyed a dazzling color and infused with a different executive survival power. Drawn from the legendary endurance required to translate Jason’s ambitions into decisions the rest of the leadership team can actually execute.",
       "Each lock contains a little bit of patience, diplomacy and extraordinary Chief of Staff energy. Collect all five to unlock Chief of Staff Mode: unlimited tolerance, instant alignment and the ability to turn “Jason has an idea” into a deliverable before lunch.",
     ],
-    // Colors are deliberately not named: the two artworks color the vials differently,
-    // but both label the same five powers.
+    // Colors are deliberately not named, so the copy can't contradict the vial art.
     powers: [
       ["Infinite Patience", "Survive meetings that should have been emails."],
       ["Executive Translation", "Turn visionary abstractions into actionable work."],
@@ -163,7 +162,6 @@ window.SELLERS = [
     ],
     images: [
       { src: "img/products/marissa/01_five_hair_locks_collector_set.webp", alt: "A velvet presentation box holding five glowing vials of colored hair, labeled Patience, Translation, Strategic Clarity, Diplomatic Immunity and Boundary Protection", caption: "The limited collector set." },
-      { src: "img/products/marissa/02_superpower_hair_lock_variants.webp", alt: "Five glowing jars of colored hair on pedestals, each card naming one executive power, under a Chief of Staff Mode banner", caption: "Collect all five to unlock Chief of Staff Mode." },
     ],
   },
   {
