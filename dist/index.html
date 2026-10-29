@@ -912,9 +912,14 @@ window.SELLERS = [
     return { name: "market" };
   }
 
-  let lastHash = location.hash;
+  // Navigation is kept in memory. Some hosts (e.g. the OneDrive/SharePoint file viewer)
+  // show the page in a locked-down frame where changing location.hash is blocked or
+  // navigates away, so the URL is only updated as a best-effort extra.
+  const readHash = () => { try { return location.hash; } catch { return ""; } };
+  let path = readHash() || "#/";
+
   function render(focus) {
-    const route = parse(location.hash);
+    const route = parse(path);
     currentSeller = route.seller || null;
     topbar.hidden = route.name === "portal";
     document.title = route.seller ? `${route.seller.name} · DI DARKWEB INTEL` : "DI DARKWEB INTEL";
@@ -924,32 +929,49 @@ window.SELLERS = [
       : route.name === "cart" ? viewCart()
       : route.name === "receipt" ? viewReceipt()
       : viewMarket();
-    window.scrollTo(0, scrollMemory[location.hash] || 0);
+    window.scrollTo(0, scrollMemory[path] || 0);
     if (focus) {
       const h = main.querySelector("h1[tabindex]");
       if (h) h.focus({ preventScroll: true });
     }
   }
 
-  window.addEventListener("hashchange", () => {
-    scrollMemory[lastHash] = window.scrollY;
-    lastHash = location.hash;
+  function show(next) {
+    scrollMemory[path] = window.scrollY;
+    path = next;
     if (lightbox.open) lightbox.close();
     toastEl.classList.remove("show");
     render(true);
-  });
+  }
+
+  function go(next) {
+    if (next === path) return;
+    try { history.pushState(null, "", next); } catch { /* blocked: stay in memory */ }
+    show(next);
+  }
+
+  // Browser back/forward and hand-typed hashes, where the host allows them.
+  const fromUrl = () => { const h = readHash() || "#/"; if (h !== path) show(h); };
+  window.addEventListener("popstate", fromUrl);
+  window.addEventListener("hashchange", fromUrl);
 
   // ---------- clicks ----------
   document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="#/"]');
+    if (link && !link.hasAttribute("data-enter") && !e.metaKey && !e.ctrlKey && !e.shiftKey) {
+      e.preventDefault();
+      go(link.getAttribute("href"));
+      return;
+    }
     const enter = e.target.closest("[data-enter]");
     if (enter) {
       e.preventDefault();
-      if (reduceMotion) { location.hash = "#/market"; return; }
+      if (reduceMotion) { go("#/market"); return; }
       document.body.classList.add("descending");
       setTimeout(() => {
         document.body.classList.remove("descending");
         document.body.classList.add("arrived");
-        location.hash = "#/market";
+        go("#/market");
         setTimeout(() => document.body.classList.remove("arrived"), 700);
       }, 560);
       return;
@@ -971,7 +993,7 @@ window.SELLERS = [
       store.set("didw-order", lastOrder);
       cart = [];
       saveCart();
-      location.hash = "#/receipt";
+      go("#/receipt");
     }
   });
 
