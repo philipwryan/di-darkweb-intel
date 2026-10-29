@@ -19,7 +19,8 @@ The deliverable is **one self-contained file**, `dist/index.html` (~3.4 MB). It 
 ```bash
 npm install
 npm run build                        # → dist/index.html
-npm run qr -- https://final-url/     # → print/out/ qr.svg, qr.png, qr-card-letter.pdf
+npm run qr -- https://final-url/          # → print/out/ plain qr.svg, qr.png, qr-card-letter.pdf
+npm run qr:branded -- https://final-url/  # → print/out/ branded-qr.svg/.png, di-darkweb-qr-sign-letter.pdf
 ```
 
 ## Pages (hash routes, so deep links work from a single file)

@@ -4,7 +4,8 @@
   "description": "DI DARKWEB INTEL: a fictional Halloween parody marketplace, built as one self-contained HTML file.",
   "scripts": {
     "build": "node build.mjs",
-    "qr": "node print/make-qr.mjs"
+    "qr": "node print/make-qr.mjs",
+    "qr:branded": "node print/make-branded-qr.mjs"
   },
   "devDependencies": {
     "@fontsource/chakra-petch": "^5.3.0",
